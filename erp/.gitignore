@@ -7,3 +7,7 @@ dist/
 node_modules/
 .vite/
 *.log
+erp/frontend/node_modules/
+erp/backend/venv/
+erp/backend/.env
+erp/frontend/dist/
