@@ -90,7 +90,7 @@ class ComplianceAlert(Base):
     match_score = Column(Float)
     matched_entity_id = Column(UUID(as_uuid=True), ForeignKey("sanctioned_entities.id"))
     jurisdiction = Column(String(5))
-    metadata = Column(JSONB)
+    alert_metadata = Column(JSONB)
     resolved_by = Column(UUID(as_uuid=True), ForeignKey("users.id"))
     resolved_at = Column(DateTime(timezone=True))
     resolution_notes = Column(Text)

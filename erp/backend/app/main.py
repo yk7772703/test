@@ -1,9 +1,11 @@
 import logging
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
 from app.database import Base, engine, get_db
@@ -87,3 +89,14 @@ def root():
         "jurisdictions": settings.SUPPORTED_JURISDICTIONS,
         "docs": "/api/docs",
     }
+
+
+# Serve React frontend — must be after all API routes
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist")
+if os.path.isdir(STATIC_DIR):
+    app.mount("/assets", StaticFiles(directory=os.path.join(STATIC_DIR, "assets")), name="assets")
+
+    @app.get("/{full_path:path}")
+    def serve_frontend(full_path: str):
+        index = os.path.join(STATIC_DIR, "index.html")
+        return FileResponse(index)

@@ -301,7 +301,7 @@ def create_sanctions_alert(
         entity_type=entity_type,
         entity_id=entity_id,
         match_score=top_match["score"],
-        metadata={"all_matches": matches},
+        alert_metadata={"all_matches": matches},
     )
     db.add(alert)
     db.commit()
