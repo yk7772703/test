@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --toast-bg: #ffffff;
+    --toast-color: #0a0a0a;
+    --toast-border: #e4e4e7;
+  }
+
+  .dark {
+    --toast-bg: #18181b;
+    --toast-color: #fafafa;
+    --toast-border: #27272a;
+  }
+
+  * {
+    @apply border-primary-200 dark:border-primary-800;
+  }
+
+  body {
+    @apply bg-primary-50 dark:bg-primary-950 text-primary-950 dark:text-white antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-300 dark:bg-primary-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-400 dark:bg-primary-600;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary-950 dark:bg-white text-white dark:text-primary-950;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    @apply outline-none ring-1 ring-primary-950 dark:ring-white;
+  }
+}
+
+@layer utilities {
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
