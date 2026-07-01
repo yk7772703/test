@@ -50,14 +50,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }
-          >
+          <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="finance" element={<PlaceholderPage title="Finance" />} />
             <Route path="finance/invoices" element={<PlaceholderPage title="Invoices" />} />
