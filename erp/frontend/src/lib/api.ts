@@ -76,10 +76,12 @@ export const complianceApi = {
 // Auth
 export const authApi = {
   login: (email: string, password: string) => {
-    const form = new FormData()
-    form.append('username', email)
-    form.append('password', password)
-    return api.post('/auth/login', form)
+    const params = new URLSearchParams()
+    params.append('username', email)
+    params.append('password', password)
+    return api.post('/auth/login', params, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    })
   },
   register: (data: object) => api.post('/auth/register', data),
   getMe: () => api.get('/auth/me'),
