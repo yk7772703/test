@@ -16,16 +16,27 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 logger = logging.getLogger(__name__)
 
 
+def _seed_demo_user():
+    from app.models.user import User
+    from passlib.context import CryptContext
+    db = next(get_db())
+    try:
+        if not db.query(User).filter(User.email == "demo@erp.com").first():
+            pwd = CryptContext(schemes=["bcrypt"], deprecated="auto").hash("Demo123!")
+            db.add(User(email="demo@erp.com", username="demo", hashed_password=pwd, full_name="Demo User", is_active=True, jurisdiction="US"))
+            db.commit()
+            logger.info("Demo user created: demo@erp.com / Demo123!")
+    finally:
+        db.close()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Create all tables
     Base.metadata.create_all(bind=engine)
     logger.info("Database tables created/verified")
-
-    # Start background scheduler
+    _seed_demo_user()
     start_scheduler(get_db)
     logger.info("Scheduler started")
-
     yield
 
     logger.info("Shutting down")
