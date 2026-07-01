@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import { Layout } from './components/layout/Layout'
 import { Login } from './pages/auth/Login'
+import { Register } from './pages/auth/Register'
 import { Dashboard } from './pages/Dashboard'
 import { ComplianceDashboard } from './pages/compliance/ComplianceDashboard'
 import { useAuthStore } from './store/authStore'
@@ -48,7 +49,7 @@ export default function App() {
         />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/"
             element={
