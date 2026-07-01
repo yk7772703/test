@@ -26,6 +26,9 @@ def _seed_demo_user():
             db.add(User(email="demo@erp.com", username="demo", hashed_password=pwd, full_name="Demo User", is_active=True, jurisdiction="US"))
             db.commit()
             logger.info("Demo user created: demo@erp.com / Demo123!")
+    except Exception as e:
+        logger.warning(f"Could not seed demo user: {e}")
+        db.rollback()
     finally:
         db.close()
 
