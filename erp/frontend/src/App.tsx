@@ -7,7 +7,7 @@ import { Login } from './pages/auth/Login'
 import { Register } from './pages/auth/Register'
 import { Dashboard } from './pages/Dashboard'
 import { ComplianceDashboard } from './pages/compliance/ComplianceDashboard'
-import { useAuthStore } from './store/authStore'
+
 import { useThemeStore } from './store/themeStore'
 
 const queryClient = new QueryClient({
@@ -16,11 +16,6 @@ const queryClient = new QueryClient({
   },
 })
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated } = useAuthStore()
-  if (!isAuthenticated()) return <Navigate to="/login" replace />
-  return <>{children}</>
-}
 
 function AppInit() {
   const { theme } = useThemeStore()
