@@ -33,7 +33,9 @@ export function Login() {
       })
       navigate('/')
     } catch (err: any) {
-      toast.error(err.response?.data?.detail || 'Invalid credentials')
+      const msg = err.response?.data?.detail || err.message || 'Unknown error'
+      toast.error(`Error: ${msg}`, { duration: 8000 })
+      console.error('Login error:', err.response?.status, err.response?.data, err.message)
     } finally {
       setLoading(false)
     }
