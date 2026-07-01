@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
 
     # CORS
-    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
+    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173", "http://localhost:8000", "http://127.0.0.1:3000", "http://127.0.0.1:8000"]
 
     # Sanctions APIs (free/public)
     OFAC_SDN_URL: str = "https://www.treasury.gov/ofac/downloads/sdn.xml"
