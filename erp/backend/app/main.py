@@ -17,12 +17,12 @@ logger = logging.getLogger(__name__)
 
 
 def _seed_demo_user():
+    import bcrypt as _bcrypt
     from app.models.user import User
-    from passlib.context import CryptContext
     db = next(get_db())
     try:
         if not db.query(User).filter(User.email == "demo@erp.com").first():
-            pwd = CryptContext(schemes=["bcrypt"], deprecated="auto").hash("Demo123!")
+            pwd = _bcrypt.hashpw("Demo123!".encode(), _bcrypt.gensalt()).decode()
             db.add(User(email="demo@erp.com", username="demo", hashed_password=pwd, full_name="Demo User", is_active=True, jurisdiction="US"))
             db.commit()
             logger.info("Demo user created: demo@erp.com / Demo123!")
