@@ -1,0 +1,4 @@
+node_modules/
+.qa-runs/
+qa-result.json
+qa-screenshots/

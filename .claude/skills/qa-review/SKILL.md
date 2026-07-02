@@ -27,3 +27,19 @@ Note: the target URL must actually be reachable from this environment's
 network policy. If navigation fails with a network/proxy error rather than
 an HTTP error, that's an environment limitation, not a bug — say so instead
 of treating it as a defect.
+
+## Standalone web UI
+
+For manual, ad-hoc use outside of Claude (paste a link, get a report in the
+browser) there's also `erp/qa/server.cjs` — a small local web app, separate
+from this skill/agent pair and from the Compliance ERP app's ports:
+
+```
+cd erp/qa && npm install   # once
+node server.cjs            # http://localhost:4400 (override with QA_PORT)
+```
+
+It runs `inspect.cjs` with `--dump-elements --check-links` against whatever
+URL is submitted and renders the same signals (console/JS errors, failed
+requests, broken links, screenshots) as a web page. It does not fix
+anything — for fixes, use this skill or the qa-bug-fixer agent directly.

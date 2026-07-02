@@ -4,7 +4,8 @@
   "private": true,
   "description": "Browser-driven QA inspection tool used by the qa-bug-hunter agent",
   "scripts": {
-    "inspect": "node inspect.cjs"
+    "inspect": "node inspect.cjs",
+    "start": "node server.cjs"
   },
   "dependencies": {
     "playwright": "1.56.1"
