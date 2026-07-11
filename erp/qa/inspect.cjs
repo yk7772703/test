@@ -164,7 +164,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   fs.mkdirSync(args.screenshotDir, { recursive: true });
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ channel: 'chromium' });
   const page = await browser.newPage();
 
   const consoleErrors = [];
